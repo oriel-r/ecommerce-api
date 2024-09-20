@@ -20,5 +20,6 @@ Este es el backend de una aplicación de eCommerce construido con [NestJS](https
 
 ## Bitacora
 
-- **08/09/2024** Se crearon modulos, controladores, servicios y rutas CRUD de Users, Products y Auth. También en este se creo un guard para las rutas que lo requieren
-- **03/09/2024** Commit inicial, se instalaron dependencias y se inicio el proyecto con Nest
+- **20/09/2024** Se implementaron validaciones para las solicitudes (requests). También se desarrollaron los módulos de órdenes (order) y detalles de órdenes (order detail), con operaciones CRUD y la lógica necesaria para la adquisición de productos. Finalmente, se configuró la conexión a la base de datos, incluyendo los seeders para la precarga de datos.
+- **08/09/2024** Se crearon modulos, controladores, servicios y rutas CRUD de Users, Products y Auth. También en este se creo un guard para las rutas que lo requieren.
+- **03/09/2024** Commit inicial, se instalaron dependencias y se inicio el proyecto con Nest.

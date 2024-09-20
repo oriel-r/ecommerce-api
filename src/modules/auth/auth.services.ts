@@ -1,17 +1,16 @@
-import { Injectable } from "@nestjs/common";
-import { UsersRepository } from "../users/users.repository";
-import { CredentialDTO } from "./entities/CredentialDTO";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { CredentialDTO } from './entities/CredentialDTO';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthServices {
-    constructor(private userRepository:UsersRepository) {}
-    getAll() {
-        return 'Este es un get a auth'
-    }
+  constructor(private userService: UsersService) {}
+  getAll() {
+    return 'Este es un get a auth';
+  }
 
-    singIn(credentialData: CredentialDTO) {
-        const user = this.userRepository.findCredentials(credentialData)
-        if(!user) return 'Alguno de los datos es incorrecto'
-        else return 'Bienvenid@!'
-    }
+  async singIn(credentialData: CredentialDTO) {
+    const user = await this.userService.findCredentials(credentialData);
+    if(user) return "Hola!"
+  }
 }

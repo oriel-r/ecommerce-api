@@ -1,11 +1,42 @@
+import { Transform } from "class-transformer";
+import { IsEmail, IsNotEmpty, IsOptional, IsString, IsStrongPassword } from "class-validator";
+import { Order } from "src/modules/orders/entities/order.entity";
+import { DeepPartial } from "typeorm";
+
 export class UserDTO {
-    constructor (
-        public name: string,
-        public email: string,
-        public password: string,
-        public adress: string,
-        public phone: string,
-        public country?: string | undefined,
-        public city?: string | undefined
-    ) {}
+   @IsNotEmpty()
+   @IsString()
+   name: string
+   
+   @IsNotEmpty()
+   @IsEmail()
+   email: string
+
+   @IsNotEmpty()
+   @IsStrongPassword()
+   password: string
+
+   @IsNotEmpty()
+   @IsString()
+   adress: string
+   
+   @IsNotEmpty()
+   @Transform(() => Number)
+   phone: number
+   
+   @IsOptional()
+   @IsString()
+   country?: string | undefined
+   
+   @IsOptional()
+   @IsString()
+   city?: string | undefined
+   
+   @IsOptional()
+   order?: Order[]
+
+  constructor(partial: DeepPartial<UserDTO>) {
+    Object.assign(this, partial)
+  }
+
 }

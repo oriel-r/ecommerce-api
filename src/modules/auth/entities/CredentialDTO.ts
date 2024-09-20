@@ -1,6 +1,11 @@
+import { IsEmail, IsNotEmpty, IsString } from "class-validator"
+
 export class CredentialDTO {
-    constructor(
-        public email:string,
-        public password: string
-    ) {}
+  @IsEmail()
+  @IsNotEmpty()
+  email: string
+
+  @IsString()
+  @IsNotEmpty()
+  password: string
 }
