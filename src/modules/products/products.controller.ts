@@ -10,10 +10,15 @@ import {
   HttpCode,
   HttpStatus,
   ParseUUIDPipe,
+  UseInterceptors,
+  UploadedFile,
+  UsePipes,
 } from '@nestjs/common';
 import { ProductsServices } from './prooducts.service';
 import { ProductDTO } from './entities/ProductDTO';
 import { AuthGuard } from '../auth/auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { FileValidationPipe } from 'src/pipes/file-pipe/file-pipe.pipe';
 
 @Controller('products')
 export class ProductsController {
@@ -30,6 +35,12 @@ export class ProductsController {
   async getById(@Param('id', ParseUUIDPipe) id: string) {
     return await this.productsServices.getById(id);
   }
+
+  @Get(':id/image')
+  @HttpCode(HttpStatus.OK)
+  async getProductImage(@Param('id', ParseUUIDPipe) id: string) {
+    return await this.productsServices.getProductImage(id)
+  }
   
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -37,11 +48,24 @@ export class ProductsController {
   async createProduct(@Body() data: ProductDTO) {
     return await this.productsServices.createProduct(data);
   }
+
+  @Post(":id/upload")
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(FileInterceptor('file'))
+  @UsePipes(new FileValidationPipe(0,200, [ 'image/jpeg', 'image/png', 'image/webp'] ))
+  async addPorductImage(
+    @Param('id', ParseUUIDPipe) id: string,
+    @UploadedFile() file: Express.Multer.File
+  ) {
+    console.log(id, file)
+    return this.productsServices.addProductImage(id, file)
+  }
+
   
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
-  async updateProduct(@Param('id') id: string, @Body() data: ProductDTO) {
+  async updateProduct(@Param('id', ParseUUIDPipe) id: string, @Body() data: ProductDTO) {
     return await this.productsServices.updateProduct(id, data);
   }
 

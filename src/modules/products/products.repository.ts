@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ProductDTO } from './entities/ProductDTO';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 
 @Injectable()
 export class ProductsRepository {
@@ -19,6 +19,11 @@ export class ProductsRepository {
     return product
   }
   
+  async getImage(id: string) {
+    const product = await this.productRepository.findOneBy({id:id})
+    return product.imgUrl
+  }
+
   async createProduct(data): Promise<Product[]>{
     const product = await this.productRepository.create(data)
     await this.productRepository.save(product)
@@ -40,7 +45,7 @@ export class ProductsRepository {
     return await this.productRepository.delete({id: id})
   }
 
-  async createProductListByOrder(data: Iid[]) {
+  async createProductListByOrder(data: DeepPartial<Product[]>): Promise<Product[]> {
     const productsList: Product[] = []
     for(const item of data) {
       const product = await this.productRepository.findOneBy({id: item.id})
@@ -53,12 +58,17 @@ export class ProductsRepository {
     return productsList
   }
 
-  async rollbackCreateProductsList(data: Iid[]) {
+  async rollbackCreateProductsList(data: DeepPartial<Product[]>) {
     for(const item of data) {
       const product = await this.productRepository.findOneBy({id: item.id})
       if(product) product.stock ++
     }
     return true
+  }
+
+  async updateImage(id: string, data): Promise<string> {
+    await this.productRepository.update(id, {imgUrl: data })
+    return data
   }
 
 }

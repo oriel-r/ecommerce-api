@@ -9,6 +9,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SeedsModule } from './seeds/seeds.module';
 import { OrdersDetailModule } from './modules/ordersDetail/ordersDetail.module';
+import { CloudinaryService } from './service/cloudinary/cloudinary.service';
+import { FileUploadModule } from './modules/file-upload/file-upload.module';
 
 @Module({
   imports: [
@@ -26,9 +28,10 @@ import { OrdersDetailModule } from './modules/ordersDetail/ordersDetail.module';
     CategoriesModule,
     OrdersModule,
     OrdersDetailModule,
-    SeedsModule
+    SeedsModule,
+    FileUploadModule
   ],
   controllers: [],
-  providers: [],
+  providers: [CloudinaryService],
 })
 export class AppModule {}

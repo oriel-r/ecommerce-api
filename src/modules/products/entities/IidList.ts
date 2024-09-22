@@ -1,3 +1,0 @@
-interface Iid {
-    id: string
-}

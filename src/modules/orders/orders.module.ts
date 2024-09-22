@@ -15,11 +15,12 @@ import { Category } from '../categories/entities/category.entity';
 import { CategoriesModule } from '../categories/categories.module';
 import { OrdersDetailModule } from '../ordersDetail/ordersDetail.module';
 import { OrdersDetailService } from '../ordersDetail/ordersDetail.service';
+import { FileUploadModule } from '../file-upload/file-upload.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Order, OrderDetail, User, Product]),
-    UsersModule, ProductsModule, CategoriesModule, OrdersDetailModule
+    UsersModule, ProductsModule, CategoriesModule, OrdersDetailModule, FileUploadModule
   ],
   providers: [
     OrdersService, 
