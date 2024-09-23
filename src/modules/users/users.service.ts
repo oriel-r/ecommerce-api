@@ -1,4 +1,4 @@
-import { HttpCode, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpCode, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserDTO } from './entities/UserDTO';
 import { CredentialDTO } from '../auth/entities/CredentialDTO';
 import { Repository } from 'typeorm';
@@ -10,31 +10,38 @@ import { UsersRepository } from './users.repository';
 export class UsersService {
   constructor( private userRepository: UsersRepository) {}
   
-  getAll() {
+  async getAll() {
     return this.userRepository.getUsers();
   }
 
-  getById(id) {
+  async getById(id) {
     return this.userRepository.getUserById(id);
   }
   
-  createUser(data: UserDTO) {
-    return this.userRepository.createUser(data)
+  async createUser(data: UserDTO) {
+    const user = await this.userRepository.createUser(data)
+    if(!user) throw new BadRequestException('have a problem with create user')
+    const {password, ...userdata} = user
+  return userdata
   }
   
-  updateUser(id: string, data: UserDTO) {
+  async updateUser(id: string, data: UserDTO) {
     return this.userRepository.updateUser(id, data)
   }
   
-  deleteUser(id: string) {
+  async deleteUser(id: string) {
     return this.userRepository.deleteUser(id);
   }
   
-  findCredentials(data: CredentialDTO) {
+  async findCredentials(data: CredentialDTO) {
     return this.userRepository.findCredentials(data);
   }
 
-  getUserForOrder(id:string) {
+  async getUserForOrder(id:string) {
     return this.userRepository.getUserByIdForOrder(id)
+  }
+
+  async getEmail(email: string) {
+    return await this.userRepository.findEmail(email)
   }
 }

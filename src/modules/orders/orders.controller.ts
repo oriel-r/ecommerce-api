@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { OrdersService } from './orders.service';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('orders')
 export class OrdersController {
@@ -11,6 +12,7 @@ export class OrdersController {
   }
 
   @Post()
+  @UseGuards(AuthGuard)
   async createOrder(@Body() data){
     return await this.ordersService.addOrder(data)
   }

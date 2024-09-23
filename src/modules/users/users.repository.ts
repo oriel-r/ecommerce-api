@@ -52,4 +52,9 @@ export class UsersRepository {
       async findCredentials(data: CredentialDTO) {
         return await this.userRepository.findOneBy({email: data.email, password: data.password});
       } 
+      
+      async findEmail(email:string) {
+        const user = this.userRepository.findOneBy({email: email})
+        return user
+      }
 }

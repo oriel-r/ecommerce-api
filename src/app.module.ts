@@ -11,6 +11,7 @@ import { SeedsModule } from './seeds/seeds.module';
 import { OrdersDetailModule } from './modules/ordersDetail/ordersDetail.module';
 import { CloudinaryService } from './service/cloudinary/cloudinary.service';
 import { FileUploadModule } from './modules/file-upload/file-upload.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -29,7 +30,12 @@ import { FileUploadModule } from './modules/file-upload/file-upload.module';
     OrdersModule,
     OrdersDetailModule,
     SeedsModule,
-    FileUploadModule
+    FileUploadModule,
+    JwtModule.register({
+      global: true,
+      signOptions: {expiresIn: '1h'},
+      secret: process.env.JWT_SECRET
+    })
   ],
   controllers: [],
   providers: [CloudinaryService],
