@@ -20,6 +20,7 @@ Este es el backend de una aplicación de eCommerce construido con [NestJS](https
 
 ## Bitacora
 
+- **26/09/2024** Guardias para roles implementadas
 - **23/09/2024** Jwt y bcrypt implementados así como los cambios en la base de datos para guardar las claves hasheadas, ahora el authguard valida los tokens. La instalación con npm de bcrypt daba problemas y por ende la hice con yarn
 - **20/09/2024** Subida de archivos a Cloudinary implementada, con sus respectivasvalidaciones.
 - **20/09/2024** Se implementaron validaciones para las solicitudes (requests). También se desarrollaron los módulos de órdenes (order) y detalles de órdenes (order detail), con operaciones CRUD y la lógica necesaria para la adquisición de productos. Finalmente, se configuró la conexión a la base de datos, incluyendo los seeders para la precarga de datos.
