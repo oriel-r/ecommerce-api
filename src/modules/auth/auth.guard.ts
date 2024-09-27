@@ -8,6 +8,7 @@ import {
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from './utils/roles.enum';
 
 function credentialValidate(req: Request) {
   const auth = req.headers.authorization;
@@ -25,6 +26,10 @@ export class AuthGuard implements CanActivate {
     try{
 	    const secret = process.env.JWT_SECRET
 	    const payload = await this.jwtService.verify(token,{ secret })
+      if(payload.is_admin) {
+        payload.role = Role.ADMIN
+      }
+      req.user = payload
 	    return true
     } catch(error){
 	    return false

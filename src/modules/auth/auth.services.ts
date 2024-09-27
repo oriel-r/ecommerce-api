@@ -4,6 +4,7 @@ import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt'
 import { UserDTO } from '../users/entities/UserDTO';
 import { JwtService } from '@nestjs/jwt';
+import { CreateUserDto } from './entities/CreateUserDTO';
 
 @Injectable()
 export class AuthServices {
@@ -12,12 +13,15 @@ export class AuthServices {
     return 'Este es un get a auth';
   }
 
-  async singUp(data: UserDTO) {
+  async singUp(data: CreateUserDto) {
     const user = await this.userService.getEmail(data.email)
     if(user) throw new BadRequestException('this email is registred')
+    if(data.password !== data.confirmPassword) throw new BadRequestException('Passwords don`t match')
     const hashpass = await bcrypt.hash(data.password, 11)
     if(!hashpass) throw new BadRequestException('password is not hashed')
-    return this.userService.createUser({...data, password: hashpass})
+    data.password = hashpass
+    const {confirmPassword, ...newUserData} = data
+    return this.userService.createUser(new UserDTO(newUserData))
   }
 
   async singIn(credentialData: CredentialDTO) {
@@ -28,7 +32,8 @@ export class AuthServices {
     const payload = {
       sub: user.id,
       id: user.id,
-      email: user.email
+      email: user.email,
+      isAdmin: user.is_admin
     }
     const token = this.jwtService.sign(payload)
     return {message: 'Access succesfully', token:token}

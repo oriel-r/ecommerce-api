@@ -12,6 +12,7 @@ import { OrdersDetailModule } from './modules/ordersDetail/ordersDetail.module';
 import { CloudinaryService } from './service/cloudinary/cloudinary.service';
 import { FileUploadModule } from './modules/file-upload/file-upload.module';
 import { JwtModule } from '@nestjs/jwt';
+import { SharedModule } from './modules/shared/shared.module';
 
 @Module({
   imports: [
@@ -35,7 +36,8 @@ import { JwtModule } from '@nestjs/jwt';
       global: true,
       signOptions: {expiresIn: '1h'},
       secret: process.env.JWT_SECRET
-    })
+    }),
+    SharedModule
   ],
   controllers: [],
   providers: [CloudinaryService],
