@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthServices } from './auth.services';
 import { CredentialDTO } from './entities/CredentialDTO';
 import { UserDTO } from '../users/entities/UserDTO';
+import { CreateUserDto } from './entities/CreateUserDTO';
 
 @Controller('auth')
 export class AuthControllers {
@@ -13,7 +14,7 @@ export class AuthControllers {
   }
 
   @Post('/singup')
-  async singUp(@Body() userData: UserDTO) {
+  async singUp(@Body() userData: CreateUserDto) {
     return await this.authService.singUp(userData)
   } 
 

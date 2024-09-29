@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { IsEmail, IsNotEmpty, IsOptional, IsString, IsStrongPassword } from "class-validator";
+import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, IsStrongPassword } from "class-validator";
 import { Order } from "src/modules/orders/entities/order.entity";
 import { DeepPartial } from "typeorm";
 
@@ -23,6 +23,10 @@ export class UserDTO {
    @IsNotEmpty()
    @Transform(() => Number)
    phone: number
+
+   @IsOptional()
+   @IsBoolean()
+   is_admin: boolean
    
    @IsOptional()
    @IsString()
