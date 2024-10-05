@@ -1,9 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthServices } from './auth.services';
-import { CredentialDTO } from './entities/CredentialDTO';
-import { UserDTO } from '../users/entities/UserDTO';
-import { CreateUserDto } from './entities/CreateUserDTO';
+import { CredentialDTO } from './entities/credential.dto';
+import { UserDTO } from '../users/entities/user.dto';
+import { CreateUserDTO } from './entities/create-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthControllers {
   constructor(private authService: AuthServices) {}
@@ -14,7 +16,7 @@ export class AuthControllers {
   }
 
   @Post('/singup')
-  async singUp(@Body() userData: CreateUserDto) {
+  async singUp(@Body() userData: CreateUserDTO) {
     return await this.authService.singUp(userData)
   } 
 

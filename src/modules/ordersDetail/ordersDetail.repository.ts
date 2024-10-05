@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { OrderDetail } from "./entities/orderDetail.entity";
+import { OrderDetail } from "./entities/order-detail.entity";
 import { Repository } from "typeorm";
-import { OrderDetailDTO } from "./entities/OrderDetailDto";
+import { OrderDetailDTO } from "./entities/order-detail.dto";
 import { addtionProducts } from "src/helpers/orderDetailAddition";
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { ProductDTO } from "src/modules/products/entities/ProductDTO";
+import { ProductDTO } from "src/modules/products/entities/product.dto";
 import { DeepPartial } from "typeorm";
 
 export const productsMock: DeepPartial<ProductDTO[]> = [

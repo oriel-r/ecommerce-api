@@ -1,10 +1,10 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CredentialDTO } from './entities/CredentialDTO';
+import { CredentialDTO } from './entities/credential.dto';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt'
-import { UserDTO } from '../users/entities/UserDTO';
+import { UserDTO } from '../users/entities/user.dto';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto } from './entities/CreateUserDTO';
+import { CreateUserDTO } from './entities/create-user.dto';
 
 @Injectable()
 export class AuthServices {
@@ -13,7 +13,7 @@ export class AuthServices {
     return 'Este es un get a auth';
   }
 
-  async singUp(data: CreateUserDto) {
+  async singUp(data: CreateUserDTO) {
     const user = await this.userService.getEmail(data.email)
     if(user) throw new BadRequestException('this email is registred')
     if(data.password !== data.confirmPassword) throw new BadRequestException('Passwords don`t match')

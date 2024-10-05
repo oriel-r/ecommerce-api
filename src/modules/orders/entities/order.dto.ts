@@ -1,6 +1,6 @@
 import { Expose } from "class-transformer"
 import { IsArray, IsDate, IsNotEmpty, IsObject, IsString } from "class-validator"
-import { ProductDTO } from "src/modules/products/entities/ProductDTO"
+import { ProductDTO } from "src/modules/products/entities/product.dto"
 import { User } from "src/modules/users/entities/user.entity"
 import { DeepPartial } from "typeorm"
 

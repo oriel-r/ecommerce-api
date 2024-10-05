@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, IsStrongPassword, IsString, IsOptional, Matches } 
 import { Transform } from "class-transformer"
 import { Order } from "src/modules/orders/entities/order.entity"
 
-export class CreateUserDto {
+export class CreateUserDTO {
     @IsNotEmpty()
     @IsString()
     name: string

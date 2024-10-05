@@ -15,11 +15,13 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { ProductsServices } from './prooducts.service';
-import { ProductDTO } from './entities/ProductDTO';
+import { ProductDTO } from './entities/product.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileValidationPipe } from 'src/pipes/file-pipe/file-pipe.pipe';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Products')
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsServices: ProductsServices) {}

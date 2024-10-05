@@ -7,7 +7,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { OrderDetail } from '../../ordersDetail/entities/orderDetail.entity';
+import { OrderDetail } from '../../ordersDetail/entities/order-detail.entity';
 
 @Entity()
 export class Order {

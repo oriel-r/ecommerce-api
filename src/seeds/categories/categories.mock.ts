@@ -1,4 +1,4 @@
-import { CategoryDTO } from "src/modules/categories/entities/CategoryDto";
+import { CategoryDTO } from "src/modules/categories/entities/category.dto";
 
 export const categoriesMock: CategoryDTO[] = [
     {name:'smartphone'}, 

@@ -1,4 +1,4 @@
-import { UserDTO } from "src/modules/users/entities/UserDTO";
+import { UserDTO } from "src/modules/users/entities/user.dto";
 import * as bcrypt from 'bcrypt'
 import * as dotenv from 'dotenv'
 

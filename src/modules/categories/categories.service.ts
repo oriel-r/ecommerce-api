@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CategoryDTO } from './entities/CategoryDto';
+import { CategoryDTO } from './entities/category.dto';
 
 @Injectable()
 export class CategoriesService {

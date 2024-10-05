@@ -20,6 +20,14 @@ Este es el backend de una aplicación de eCommerce construido con [NestJS](https
 
 ## Bitacora
 
+"moduleDirectories": ["<rootDir>/../", "node_modules"]
+"moduleNameMapper": {
+"^src/(._)": "<rootDir>/$1",
+"tests/(._)": "<rootDir>/**tests**/$1"
+}
+config de jest
+
+- **05/10/2024** Documentació generada mediante el uso de swagger y su respectivo plugin
 - **29/09/2024** Se añadio un seed que registra un user admin al levantar a aplicación
 - **26/09/2024** Guardias para roles implementadas
 - **23/09/2024** Jwt y bcrypt implementados así como los cambios en la base de datos para guardar las claves hasheadas, ahora el authguard valida los tokens. La instalación con npm de bcrypt daba problemas y por ende la hice con yarn

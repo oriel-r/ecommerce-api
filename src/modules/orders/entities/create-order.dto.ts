@@ -1,6 +1,6 @@
 import { Expose } from "class-transformer"
 import { IsArray, IsNotEmpty, IsString, IsUUID } from "class-validator"
-import { ProductDTO } from "src/modules/products/entities/ProductDTO"
+import { ProductDTO } from "src/modules/products/entities/product.dto"
 import { DeepPartial } from "typeorm"
 
 export class CreateOrderDto {

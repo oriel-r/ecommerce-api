@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ProductDTO } from './entities/ProductDTO';
+import { ProductDTO } from './entities/product.dto';
 import { ProductsRepository } from './products.repository';
 import { CategoriesService } from '../categories/categories.service';
 import { FileUploadService } from '../file-upload/file-upload.service';

@@ -3,7 +3,7 @@ import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
-import { OrderDetail } from '../ordersDetail/entities/orderDetail.entity';
+import { OrderDetail } from '../ordersDetail/entities/order-detail.entity';
 import { User } from '../users/entities/user.entity';
 import { Product } from '../products/entities/product.entity';
 import { UsersService } from '../users/users.service';

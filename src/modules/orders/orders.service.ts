@@ -1,15 +1,15 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Order } from './entities/order.entity';
-import { OrderDetail } from '../ordersDetail/entities/orderDetail.entity';
+import { OrderDetail } from '../ordersDetail/entities/order-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { OrdersReposiroy } from './orders.repository';
-import { OrderDto } from './entities/OrderDto';
+import { OrderDto } from './entities/order.dto';
 import { UsersService } from '../users/users.service';
 import { ProductsServices } from '../products/prooducts.service';
 import { User } from '../users/entities/user.entity';
 import { OrdersDetailService } from '../ordersDetail/ordersDetail.service';
-import { CreateOrderDto } from './entities/createOrderDto';
+import { CreateOrderDto } from './entities/create-order.dto';
 
 @Injectable()
 export class OrdersService {
