@@ -1,0 +1,39 @@
+services:
+
+  ecommerce-api:
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    ports: 
+    - '3000:3000'
+    env_file:
+      - .env.development.local
+    depends_on: 
+     - postgres
+    networks:
+     - ecommerce-app
+
+
+  postgres:
+      image: postgres:17
+      container_name: postgres
+      environment:
+        POSTGRES_USER: dbadmin
+        POSTGRES_PASSWORD: admin
+        POSTGRES_DB: ecommerce
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      ports:
+        - '5434:5432'
+      networks:
+        - ecommerce-app
+
+ 
+
+volumes:
+  postgres_data:
+
+networks:
+  ecommerce-app:
+    driver: bridge
+

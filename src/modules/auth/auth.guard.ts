@@ -6,14 +6,16 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 import { Role } from './utils/roles.enum';
+import * as dotenv from "dotenv"
 
 function credentialValidate(req: Request) {
   const auth = req.headers.authorization;
   return auth === 'user@example.com:pass1234';
 }
+
+dotenv.config({path: "env.development.local"})
 
 @Injectable()
 export class AuthGuard implements CanActivate {

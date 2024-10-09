@@ -20,13 +20,7 @@ Este es el backend de una aplicación de eCommerce construido con [NestJS](https
 
 ## Bitacora
 
-"moduleDirectories": ["<rootDir>/../", "node_modules"]
-"moduleNameMapper": {
-"^src/(._)": "<rootDir>/$1",
-"tests/(._)": "<rootDir>/**tests**/$1"
-}
-config de jest
-
+- **09/10/2024** App dockerizada
 - **05/10/2024** Documentació generada mediante el uso de swagger y su respectivo plugin
 - **29/09/2024** Se añadio un seed que registra un user admin al levantar a aplicación
 - **26/09/2024** Guardias para roles implementadas

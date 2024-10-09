@@ -9,7 +9,7 @@ aislar la logica del mismo del resto de la aplicacón*/
 export class CloudinaryService {
     constructor() {
         dotenv.config({
-            path:'.env.development'
+            path:'.env.development.local'
         })
         cloudinary.config({
             cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

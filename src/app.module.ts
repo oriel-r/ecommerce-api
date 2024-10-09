@@ -13,6 +13,10 @@ import { CloudinaryService } from './service/cloudinary/cloudinary.service';
 import { FileUploadModule } from './modules/file-upload/file-upload.module';
 import { JwtModule } from '@nestjs/jwt';
 import { SharedModule } from './modules/shared/shared.module';
+import * as dotenv from "dotenv"
+
+dotenv.config({path:"env.development.local"})
+
 
 @Module({
   imports: [

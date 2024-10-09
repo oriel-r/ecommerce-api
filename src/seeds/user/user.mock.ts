@@ -2,7 +2,7 @@ import { UserDTO } from "src/modules/users/entities/user.dto";
 import * as bcrypt from 'bcrypt'
 import * as dotenv from 'dotenv'
 
-dotenv.config({path: '.env.development'});
+dotenv.config({path: '.env.development.local'});
 
 const createAdmin = async ():Promise<UserDTO> => {
 const hashedpassword = await bcrypt.hash(process.env.ADMIN_SEED_PASSWORD, 10);

@@ -3,7 +3,7 @@ import { config as dotennConfig } from 'dotenv'
 import { registerAs } from '@nestjs/config';
 
 
-dotennConfig({path: '.env.development'})
+dotennConfig({path: '.env.development.local'})
 
 const dataSourceConfig: DataSourceOptions = {
         type: 'postgres',
@@ -15,8 +15,8 @@ const dataSourceConfig: DataSourceOptions = {
         entities:  ['dist/**/*.entity{.ts,.js}'],
         migrations: ['dist/migration/*{.ts,.js}'],
         logging: ['error'],
-        synchronize: false,
-        dropSchema: false
+        synchronize: true,
+        dropSchema: false,          
 };
 
 export default registerAs('typeorm', () => dataSourceConfig)
