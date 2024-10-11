@@ -1,4 +1,4 @@
-name: deploy
+name: Docker build and Render deploy
 
 on:
   push:
