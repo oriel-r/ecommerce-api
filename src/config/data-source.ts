@@ -16,7 +16,10 @@ const dataSourceConfig: DataSourceOptions = {
         migrations: ['dist/migration/*{.ts,.js}'],
         logging: ['error'],
         synchronize: true,
-        dropSchema: false,          
+        dropSchema: false,
+        extra: {
+                ssl:true
+        }     
 };
 
 export default registerAs('typeorm', () => dataSourceConfig)
