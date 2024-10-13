@@ -15,30 +15,22 @@ export class ProductsRepository {
   }
 
   async getById(id: string) {
-    const product = await this.productRepository.findOneBy({id: id})
-    return product
+    return await this.productRepository.findOneBy({id})
   }
   
   async getImage(id: string) {
-    const product = await this.productRepository.findOneBy({id:id})
+    const product = await this.productRepository.findOneBy({id})
     return product.imgUrl
   }
 
   async createProduct(data): Promise<Product[]>{
-    const product = await this.productRepository.create(data)
-    await this.productRepository.save(product)
-    return product
+    return await this.productRepository.save(
+      this.productRepository.create(data)
+    )
   }
 
   async updateProduct(id: string, data: ProductDTO) {
-    const product = await this.productRepository.findOneBy({id: id})
-    product.name = data.name
-    product.description = data.description
-    product.price = data.price
-    product.stock = data.stock
-    product.imgUrl = data.imgUrl
-    await this.productRepository.save(product)
-    return product
+    return await this.productRepository.update(id, data)
   }
 
   async deleteProduct(id:string) {

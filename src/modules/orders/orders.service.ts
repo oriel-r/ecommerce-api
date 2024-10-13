@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Order } from './entities/order.entity';
 import { OrderDetail } from '../ordersDetail/entities/order-detail.entity';
@@ -10,6 +10,7 @@ import { ProductsServices } from '../products/prooducts.service';
 import { User } from '../users/entities/user.entity';
 import { OrdersDetailService } from '../ordersDetail/ordersDetail.service';
 import { CreateOrderDto } from './entities/create-order.dto';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class OrdersService {
@@ -20,8 +21,10 @@ export class OrdersService {
   private readonly ordersDetailService: OrdersDetailService
 ) {}
 
-  getOrders() {
-    return this.ordersRepository.getOrders()
+  async getOrders(): Promise<Order[]> {
+    const orders = await this.ordersRepository.getOrders()
+    if (!orders.length) throw new NotFoundException('Orders not found')
+    return orders
   }
 
   async addOrder(data:CreateOrderDto) {

@@ -9,11 +9,7 @@ import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { Role } from './utils/roles.enum';
 import * as dotenv from "dotenv"
-
-function credentialValidate(req: Request) {
-  const auth = req.headers.authorization;
-  return auth === 'user@example.com:pass1234';
-}
+import { extractRequest } from 'src/helpers/extract-request';
 
 dotenv.config({path: "env.development.local"})
 
@@ -23,7 +19,7 @@ export class AuthGuard implements CanActivate {
   async canActivate(
     context: ExecutionContext,
   ): Promise<boolean> {
-    const req = context.switchToHttp().getRequest();
+    const req = extractRequest(context)
     const token = req.headers['authorization'].split(' ')[1]
     try{
 	    const secret = process.env.JWT_SECRET

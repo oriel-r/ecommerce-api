@@ -16,13 +16,7 @@ export class UsersRepository {
     }
 
     async getUserById(id:string) {
-        const user = await this.userRepository.findOne(
-            {
-                where:{id: id},
-                relations:{orders:true
-            }})
-        const {password, ...result} = user
-        return result
+        return await this.userRepository.findOneBy({id})
     }
 
     async getUserByIdForOrder(id:string) {

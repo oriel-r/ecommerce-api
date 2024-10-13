@@ -17,9 +17,9 @@ const dataSourceConfig: DataSourceOptions = {
         logging: ['error'],
         synchronize: true,
         dropSchema: false,
-        extra: {
-                ssl:true
-        }     
+     //   extra: {
+     //           ssl:true
+     //   }     
 };
 
 export default registerAs('typeorm', () => dataSourceConfig)
