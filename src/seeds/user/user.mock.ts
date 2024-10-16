@@ -10,7 +10,7 @@ const hashedpassword = await bcrypt.hash(process.env.ADMIN_SEED_PASSWORD, 10);
     return {
         name: 'Admin',
         email: 'admin@example.com',
-        password: hashedpassword,
+        password: "my@pass123",
         is_admin: true,
         phone: 11223344,
         adress: 'Av Siempreviva 1234',

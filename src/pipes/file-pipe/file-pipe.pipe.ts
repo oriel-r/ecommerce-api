@@ -12,8 +12,8 @@ export class FileValidationPipe implements PipeTransform {
     this.min = min
     this.mimetype = mimetype
   }
-  transform(value: UploadFIleDto, metadata: ArgumentMetadata,) {
-    
+  transform(value: Express.Multer.File , metadata: ArgumentMetadata,) {
+    console.log('pipe', value)
     if(!value) throw new BadRequestException('file is required')
     if(Number(value.size) > this.max) throw  new BadRequestException('this file is larger than allowed')
     if(Number(value.size) < this.min) throw new BadRequestException('this file is smaller than allowed')

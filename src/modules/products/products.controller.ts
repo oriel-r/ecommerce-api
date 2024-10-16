@@ -19,15 +19,16 @@ import { ProductDTO } from './entities/product.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileValidationPipe } from 'src/pipes/file-pipe/file-pipe.pipe';
-import { ApiBearerAuth, ApiForbiddenResponse, ApiNotFoundResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { error } from 'console';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiForbiddenResponse, ApiNotFoundResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RoleGuard } from '../auth/role.guard';
+import { UploadFileDTO } from '../file-upload/dto/upload-file.dto';
 
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsServices: ProductsServices) {}
 
+  
   @Get()
   @ApiOperation({
     summary: 'Get all producs'
@@ -56,6 +57,7 @@ export class ProductsController {
     return await this.productsServices.getById(id);
   }
   
+
   @Get(':id/image')
   @ApiOperation({
     summary: "Get product's image"
@@ -68,6 +70,7 @@ export class ProductsController {
     return await this.productsServices.getProductImage(id)
   }
   
+
   @Post()
   @ApiOperation({
     summary: 'Add new product'
@@ -79,15 +82,31 @@ export class ProductsController {
     return await this.productsServices.createProduct(data);
   }
 
-  @Post(":id/upload")
+  @Put(":id/upload")
+  @ApiOperation({
+    summary: "Upload product`s image",
+    description: 'The formats supported are jpg, png, webp. and max size is 200kb '
+  })
   @HttpCode(HttpStatus.OK)
+  @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
-  @UsePipes(new FileValidationPipe(0,200, [ 'image/jpeg', 'image/png', 'image/webp'] ))
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: { 
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
+  //@UsePipes(new FileValidationPipe(0, 1000000))
   async addPorductImage(
     @Param('id', ParseUUIDPipe) id: string,
-    @UploadedFile() file: Express.Multer.File
+    @UploadedFile(new FileValidationPipe(0, 1000000, [ 'image/jpeg', 'image/png', 'image/webp', 'image/jpg'])) file: Express.Multer.File
   ) {
-    console.log(id, file)
+    console.log('function', id, file)
     return this.productsServices.addProductImage(id, file)
   }
 
