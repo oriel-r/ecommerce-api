@@ -44,6 +44,6 @@ dotenv.config({path:"env.development.local"})
     SharedModule
   ],
   controllers: [],
-  providers: [CloudinaryService],
+  providers: [CloudinaryService ],
 })
 export class AppModule {}

@@ -24,6 +24,7 @@ export class AuthGuard implements CanActivate {
     try{
 	    const secret = process.env.JWT_SECRET
 	    const payload = await this.jwtService.verify(token,{ secret })
+      console.log(payload)
       if(payload.is_admin) {
         payload.role = Role.ADMIN
       }

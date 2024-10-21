@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -16,6 +17,8 @@ import { AuthGuard } from '../auth/auth.guard';
 import { ApiBearerAuth, ApiForbiddenResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { error } from 'console';
 import { RoleGuard } from '../auth/role.guard';
+import { Roles } from '../auth/utils/role.set';
+import { Role } from '../auth/utils/roles.enum';
 
 @ApiTags('Users')
 @Controller('users')
@@ -35,6 +38,7 @@ export class UsersController {
   })
   @ApiBearerAuth()
   @HttpCode(HttpStatus.OK)
+  @Roles(Role.ADMIN)
   @UseGuards(AuthGuard, RoleGuard)
   getAll() {
     return this.userServices.getAll();

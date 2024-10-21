@@ -5,9 +5,10 @@ import * as bcrypt from 'bcrypt'
 import { UserDTO } from '../users/entities/user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDTO } from './entities/create-user.dto';
+import { Role } from './utils/roles.enum';
 
 @Injectable()
-export class AuthServices {
+export class AuthService {
   constructor(private userService: UsersService, private readonly jwtService: JwtService) {}
   getAll() {
     return 'Este es un get a auth';
@@ -33,8 +34,9 @@ export class AuthServices {
       sub: user.id,
       id: user.id,
       email: user.email,
-      isAdmin: user.is_admin
+      roles: user.is_admin ? Role.ADMIN : Role.USER
     }
+    console.log(payload)
     const token = this.jwtService.sign(payload)
     return {message: 'Access succesfully', token:token}
   }

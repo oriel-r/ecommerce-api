@@ -16,7 +16,7 @@ const dataSourceConfig: DataSourceOptions = {
         migrations: ['dist/migration/*{.ts,.js}'],
         logging: ['error'],
         synchronize: true,
-        dropSchema: false,
+        dropSchema: true,
      //   extra: {
      //           ssl:true
      //   }     

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { AuthServices } from './auth.services';
+import { AuthService } from './auth.service';
 import { CredentialDTO } from './entities/credential.dto';
 import { UserDTO } from '../users/entities/user.dto';
 import { CreateUserDTO } from './entities/create-user.dto';
@@ -8,7 +8,7 @@ import { ApiBadRequestResponse, ApiConflictResponse, ApiCreatedResponse, ApiNotF
 @ApiTags('Authorization')
 @Controller('auth')
 export class AuthControllers {
-  constructor(private authService: AuthServices) {}
+  constructor(private authService: AuthService) {}
 
   @Post('/singup')
   @ApiOperation({

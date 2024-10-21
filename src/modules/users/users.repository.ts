@@ -12,7 +12,9 @@ export class UsersRepository {
     ) {}
 
     async getUsers() {
-        return await this.userRepository.find()
+        return await this.userRepository.find({
+          select: ['id', 'name', 'email', 'phone', 'adress', 'city', 'city', 'orders']
+        })
     }
 
     async getUserById(id:string) {

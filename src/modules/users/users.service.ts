@@ -11,15 +11,11 @@ import { isEqual } from 'src/helpers/is-equial';
 export class UsersService {
   constructor( private userRepository: UsersRepository) {}
   
-  async getAll(): Promise<Array<Omit<User, 'password'>>> {
+  async getAll(): Promise<Array<Omit<User, 'password' | 'is_admin'>>> {
     let allUsers= []
     const result = await this.userRepository.getUsers()
     if(!result.length) throw new NotFoundException('Users not found')
-    for(const user of result) {
-      const {password, ...userData} = user
-      allUsers.push(userData)
-    }
-    return allUsers
+    return result
   }
 
   async getById(id: string) {
