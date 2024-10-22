@@ -33,7 +33,7 @@ export class Order {
   @ApiProperty({
     description: "order's detail"
   })
-  @OneToOne(() => OrderDetail)
+  @OneToOne(() => OrderDetail, {cascade: true})
   @JoinColumn()
   order_detail: OrderDetail;
 }

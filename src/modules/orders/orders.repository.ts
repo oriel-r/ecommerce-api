@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Order } from "./entities/order.entity";
 import { Repository } from "typeorm";
@@ -16,6 +16,9 @@ export class OrdersReposiroy {
         return await this.orderRepository.find({relations:["user_id", "order_detail"]})
     }
     
+    async getOrderById(id:string) {
+        return await this.orderRepository.findOneBy({id})
+    }
 
     async createOrder(data: OrderDto): Promise <Order> {
         const order = this.orderRepository.create(data)
@@ -27,5 +30,6 @@ export class OrdersReposiroy {
         const order = await this.orderRepository.update(id, {order_detail: data})
         return
     }
+
     
 }

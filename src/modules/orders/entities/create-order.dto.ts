@@ -9,7 +9,6 @@ export class CreateOrderDto {
     @ApiProperty({
         description: "user's id"
     })
-    @IsString()
     @IsNotEmpty()
     @Expose({name: "user_id"})
     @IsUUID()

@@ -13,12 +13,12 @@ export class UserSeeder {
 
     async seed() {
         try {
-            const user = await this.userRepository.create( await admin)
-            const result = await this.userRepository.save(user)
-            console.log('Admin user is registered from seed')
+            const newUser = await admin
+             await this.userRepository.save(
+                this.userRepository.create(newUser)
+             )
+            console.log('Admin user was created by seed')
         } catch(error) {
-            console.log('Have a problem with user seed')
-            console.error(error)
-        }
+            console.log('admin user already exist')        }
     }
 }

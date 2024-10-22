@@ -27,6 +27,12 @@ export class OrdersService {
     return orders
   }
 
+  async getOrderById(id:string) {
+    const order = await this.ordersRepository.getOrderById(id)
+    if(!order) throw new NotFoundException('order not found')
+      return order
+  }
+
   async addOrder(data:CreateOrderDto) {
     const user = await this.usersService.getUserForOrder(data.userId)
     const products = await this.productsService.getProductsList(data.products)
@@ -39,6 +45,5 @@ export class OrdersService {
     }
     else throw new HttpException('Algo salio mal', HttpStatus.BAD_REQUEST)
   }
-
 
 }

@@ -71,6 +71,6 @@ export class User {
   @ApiProperty({
     description: '1:N relation with order'
   })
-  @OneToMany(() => Order, (order) => order.user_id)
+  @OneToMany(() => Order, (order) => order.user_id, {onDelete: 'CASCADE'})
   orders: Order[];
 }
