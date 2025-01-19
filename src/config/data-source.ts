@@ -8,7 +8,7 @@ dotennConfig({path: '.env.development.local'})
 const dataSourceConfig: DataSourceOptions = {
         type: 'sqlite',
         database: process.env.DB_NAME,
-        key: process.env.DB_PASSWORD
+        key: process.env.DB_PASSWORD,
         entities:  ['dist/**/*.entity{.ts,.js}'],
         migrations: ['dist/migration/*{.ts,.js}'],
         logging: ['error'],
